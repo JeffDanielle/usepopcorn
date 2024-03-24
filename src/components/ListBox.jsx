@@ -1,22 +1,19 @@
 import { useState } from "react";
-
-
-
-const ListBox = ({ children }) => {
-    const [isOpen1, setIsOpen1] = useState(true);
+const Box = ({ children }) => {
+    const [isOpen, setIsOpen] = useState(true);
     return (
         <div className="box overflow-hidden">
             <button
                 className="btn-toggle"
-                onClick={() => setIsOpen1((open) => !open)}
+                onClick={() => setIsOpen((open) => !open)}
             >
-                {isOpen1 ? "–" : "+"}
+                {isOpen ? "–" : "+"}
             </button>
-            {isOpen1 && (
+            {isOpen && (
                 children
             )}
         </div>
     );
 }
 
-export default ListBox;
+export default Box;

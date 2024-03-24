@@ -1,10 +1,3 @@
-import { useState } from "react";
-import ListBox from "./ListBox";
-import WatchedBox from "./WatchedBox";
-
-
-
-
 const Main = ({ children }) => {
 
 

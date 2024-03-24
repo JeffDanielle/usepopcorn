@@ -1,15 +1,17 @@
+import { useState } from "react";
+import "./custom.css";
+import Navbar from "./components/Navbar";
+import Main from "./components/Main";
 
 
-import './App.css'
 
-function App() {
+export default function App() {
+
+
   return (
     <>
-      <h1 className="text-3xl font-bold underline">
-        Hello world!
-      </h1>
+      <Navbar />
+      <Main />
     </>
-  )
+  );
 }
-
-export default App

@@ -2,7 +2,7 @@ import { useState } from "react";
 const Box = ({ children }) => {
     const [isOpen, setIsOpen] = useState(true);
     return (
-        <div className="box overflow-hidden">
+        <div className="box">
             <button
                 className="btn-toggle"
                 onClick={() => setIsOpen((open) => !open)}

@@ -4,10 +4,12 @@ import StarRating from "./StarRating"
 
 const KEY = "c5da4c73";
 
-const MovieDetails = ({ selectedId, onCloseMovie }) => {
+const MovieDetails = ({ selectedId, onCloseMovie, onAddWatch, watched }) => {
     const [movie, setMovie] = useState({});
     const [isLoading, setIsLoading] = useState(false);
-
+    const [userRating, setUserRating] = useState('');
+    const isWatched = watched.map((item) => item.imdbID).includes(selectedId);
+    const watchedUserRating = watched.find(movie => movie.imdbID === selectedId)?.userRating;
     const {
         Title: title,
         Year: year,
@@ -20,6 +22,22 @@ const MovieDetails = ({ selectedId, onCloseMovie }) => {
         Director: director,
         Genre: genre
     } = movie
+
+    const handleAdd = () => {
+        const newWatchMovie = {
+            imdbID: selectedId,
+            title,
+            year,
+            poster,
+            imdbRating: Number(imdbRating),
+            runtime: Number(runtime.split(' ').at(0)),
+            userRating,
+        }
+
+        onAddWatch(newWatchMovie)
+        onCloseMovie();
+        // setUserRating("")
+    }
 
     useEffect(() => {
         const getMovieDetails = async () => {
@@ -55,9 +73,17 @@ const MovieDetails = ({ selectedId, onCloseMovie }) => {
                         </div>
                     </header>
                     <section>
-                        <div className="rating">
-                            <StarRating maxRating={10} size={24} />
-                        </div>
+                        {!isWatched ?
+                            <>
+                                <div className="rating">
+                                    <StarRating maxRating={10} size={24} onSet={setUserRating} />
+                                    {userRating > 0 && <button className="btn-add" onClick={handleAdd}>
+                                        + Add to list
+                                    </button>}
+                                </div>
+                            </> :
+                            <p>You rated this movie {watchedUserRating} ⭐</p>
+                        }
                         <p><em>{plot}</em></p>
                         <p>Starring {actors}</p>
                         <p>Directed by {director}</p>

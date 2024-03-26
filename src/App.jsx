@@ -129,9 +129,11 @@ export default function App() {
   useEffect(() => {
     if (!title) return;
     document.title = `Movie | ${title}`;
-  },
-    [title]
-  );
+
+    return () => {
+      document.title = "usePopcorn";
+    };
+  }, [title]);
 
 
   const Loader = () => {

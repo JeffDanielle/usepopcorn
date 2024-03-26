@@ -70,11 +70,13 @@ export default function App() {
   const [watched, setWatched] = useState([]);
   const [isLoading, setIsLoading] = useState(false);
   const [error, setError] = useState("");
+  const [title, setTitle] = useState("");
   const tempQuery = "interstellar";
   const [selectedId, setSelectedId] = useState(null);
 
   const handleSelectMovie = (id) => {
     setSelectedId(selectedId => id === selectedId ? null : id);
+    setTitle(movies.find(movie => movie.imdbID === id).Title);
   }
 
   const handleCloseMovie = () => {
@@ -114,6 +116,22 @@ export default function App() {
     }
     fetchMovies();
   }, [query])
+
+  // useEffect(() => {
+  //   if (!title) return;
+  //   document.title = `Movie | ${selectedId}`;
+
+  //   return () => {
+  //     document.title = "usePopcorn";
+  //   }
+  // }, [title])
+
+  useEffect(() => {
+    if (!title) return;
+    document.title = `Movie | ${title}`;
+  },
+    [title]
+  );
 
 
   const Loader = () => {

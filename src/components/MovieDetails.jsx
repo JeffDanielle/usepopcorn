@@ -8,6 +8,7 @@ const MovieDetails = ({ selectedId, onCloseMovie, onAddWatch, watched }) => {
     const [movie, setMovie] = useState({});
     const [isLoading, setIsLoading] = useState(false);
     const [userRating, setUserRating] = useState('');
+    // const [myTitle, setMyTitle] = useState('');
     const isWatched = watched.map((item) => item.imdbID).includes(selectedId);
     const watchedUserRating = watched.find(movie => movie.imdbID === selectedId)?.userRating;
     const {
@@ -52,6 +53,16 @@ const MovieDetails = ({ selectedId, onCloseMovie, onAddWatch, watched }) => {
         getMovieDetails()
 
     }, [selectedId])
+
+    // useEffect(() => {
+    //     document.title = "TEST";
+    // }, [])
+
+
+
+
+
+
     return (
         <div className="details" >
             {isLoading ? <p className="loader">Loading...</p> :

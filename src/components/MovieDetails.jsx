@@ -38,7 +38,22 @@ const MovieDetails = ({ selectedId, onCloseMovie, onAddWatch, watched }) => {
         onAddWatch(newWatchMovie)
         onCloseMovie();
         // setUserRating("")
-    }
+    };
+
+    useEffect(() => {
+        const callBack = () =>
+            document.addEventListener("keydown", (e) => {
+                if (e.code === "Escape") {
+                    onCloseMovie()
+                }
+            });
+
+        document.addEventListener('keydown', callBack);
+
+        return () => {
+            document.removeEventListener('keydown', callBack)
+        }
+    }, [onCloseMovie])
 
     useEffect(() => {
         const getMovieDetails = async () => {

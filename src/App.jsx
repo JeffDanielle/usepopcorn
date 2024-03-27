@@ -103,10 +103,10 @@ export default function App() {
         setMovies(data.Search);
       }
       catch (error) {
-        console.error(error.message);
         setError(error.message);
 
         if (error.name !== "AbortError") {
+          console.log(error.message);
           setError(error.message)
         }
       } finally {
@@ -118,11 +118,14 @@ export default function App() {
       setError("");
       return;
     }
+    handleCloseMovie();
     fetchMovies();
     return function () {
       controller.abort();
     }
   }, [query])
+
+
 
   useEffect(() => {
     if (!title) return;

@@ -1,6 +1,7 @@
 import { useRef, useState } from "react";
 import { useEffect } from "react";
 import StarRating from "./StarRating"
+import useKey from "../customHooks/useKey";
 
 const KEY = "c5da4c73";
 
@@ -48,20 +49,22 @@ const MovieDetails = ({ selectedId, onCloseMovie, onAddWatch, watched }) => {
         // setUserRating("")
     };
 
-    useEffect(() => {
-        const callBack = () =>
-            document.addEventListener("keydown", (e) => {
-                if (e.code === "Escape") {
-                    onCloseMovie()
-                }
-            });
+    useKey("Escape", onCloseMovie)
 
-        document.addEventListener('keydown', callBack);
+    // useEffect(() => {
+    //     const callBack = () =>
+    //         document.addEventListener("keydown", (e) => {
+    //             if (e.code === "Escape") {
+    //                 onCloseMovie()
+    //             }
+    //         });
 
-        return () => {
-            document.removeEventListener('keydown', callBack)
-        }
-    }, [onCloseMovie])
+    //     document.addEventListener('keydown', callBack);
+
+    //     return () => {
+    //         document.removeEventListener('keydown', callBack)
+    //     }
+    // }, [onCloseMovie])
 
     useEffect(() => {
         const getMovieDetails = async () => {

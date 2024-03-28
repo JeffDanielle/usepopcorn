@@ -13,6 +13,7 @@ import { useEffect } from "react";
 import SelectedMovie from "./components/MovieDetails";
 import MovieDetails from "./components/MovieDetails";
 import useMovies from "./customHooks/useMovies";
+import useLocalStorage from "./customHooks/useLocalStorage";
 
 const tempMovieData = [
   {
@@ -70,16 +71,17 @@ export default function App() {
   // const [movies, setMovies] = useState([]);
 
   const { movies, isLoading, error } = useMovies(query)
+  const [watched, setWatched] = useLocalStorage([], "watched");
   // const [watched, setWatched] = useState([]);
   // const [isLoading, setIsLoading] = useState(false);
   // const [error, setError] = useState("");
   const [title, setTitle] = useState("");
   const [selectedId, setSelectedId] = useState(null);
 
-  const [watched, setWatched] = useState(() => {
-    const storedValue = localStorage.getItem("watched");
-    return JSON.parse(storedValue)
-  });
+  // const [watched, setWatched] = useState(() => {
+  //   const storedValue = localStorage.getItem("watched");
+  //   return JSON.parse(storedValue)
+  // });
 
 
   const handleSelectMovie = (id) => {
